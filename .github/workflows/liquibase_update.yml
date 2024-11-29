@@ -21,8 +21,9 @@ jobs:
 
     - name: Install Liquibase
       run: |
-        wget https://download.liquibase.org/liquibase-4.30.0.tar.gz
-        tar -xvzf liquibase-4.30.0.tar.gz
+        # Fetch the latest version of Liquibase (replace with the correct URL)
+        wget https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz
+        tar -xvzf liquibase-4.20.0.tar.gz
         sudo mv liquibase /usr/local/bin/
 
     - name: Verify Liquibase Installation
