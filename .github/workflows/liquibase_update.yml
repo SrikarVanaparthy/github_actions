@@ -1,0 +1,32 @@
+name: Update Database with Liquibase
+
+on:
+  push:
+    branches:
+      - main # Trigger on pushes to the main branch
+
+jobs:
+  update-database:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '11' # Match the version you are using with Liquibase
+
+    - name: Run Liquibase Update
+      env:
+        LIQUIBASE_HOME: C:\Program Files\liquibase\lib # Adjust this if Liquibase is installed in a custom location
+        PATH: $LIQUIBASE_HOME:$PATH
+      run: |
+        liquibase --changeLogFile=dbchangelog5.xml \
+                  --url="jdbc:mysql://localhost:3306/UsersData" \
+                  --username=${{ secrets.DB_USERNAME }} \
+                  --password=${{ secrets.DB_PASSWORD }} \
+                  --driver="com.mysql.cj.jdbc.Driver" \
+                  update
