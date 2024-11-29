@@ -19,11 +19,6 @@ jobs:
         distribution: 'temurin'
         java-version: '11' # Match the version required by Liquibase
 
-    - name: Install Liquibase
-      run: |
-        curl -sL https://download.liquibase.org/liquibase-4.30.0.tar.gz | tar xz
-        sudo mv liquibase /usr/local/bin/liquibase
-
     - name: Run Liquibase Update
       env:
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
